@@ -7,10 +7,11 @@
 
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>demo</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <uAC6>0</uAC6>
+      <pCCUsed>6100001::V6.10.1::.\ARMCLANG</pCCUsed>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>S32K146UAxxxLQx</Device>
@@ -47,14 +48,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\</OutputDirectory>
+          <OutputDirectory>.\Objects\</OutputDirectory>
           <OutputName>S32KEVB_DEMO</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\</ListingPath>
+          <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -125,47 +126,6 @@
             <HexOffset>0</HexOffset>
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
-          <Simulator>
-            <UseSimulator>0</UseSimulator>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>1</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Simulator>
-          <Target>
-            <UseTarget>1</UseTarget>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>0</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Target>
-          <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>0</TargetSelection>
-          <SimDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-          </SimDlls>
-          <TargetDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2CM3.DLL</Driver>
-          </TargetDlls>
         </DebugOption>
         <Utilities>
           <Flash1>
@@ -173,7 +133,7 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
+            <Capability>1</Capability>
             <DriverSelection>-1</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
@@ -298,17 +258,17 @@
                 <Size>0x0</Size>
               </XRAM>
               <OCR_RVCT1>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT2>
               <OCR_RVCT3>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT3>
@@ -318,7 +278,7 @@
                 <Size>0x100000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT5>
@@ -352,7 +312,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>7</Optim>
+            <Optim>2</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -361,7 +321,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>4</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
@@ -375,10 +335,10 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>-Wno-padded -Wno-covered-switch-default  -Wno-unreachable-code-break</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>.\rtos\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -400,7 +360,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -409,7 +369,7 @@
             <TextAddressRange>0x00000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>.\RTE\Device\S32K146UAxxxLQx\S32K146_128_flash_AC6.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -420,10 +380,105 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source Group 1</GroupName>
+          <GroupName>rtos</GroupName>
+          <Files>
+            <File>
+              <FileName>context.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\rtos\src\context.c</FilePath>
+            </File>
+            <File>
+              <FileName>scheduler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\rtos\src\scheduler.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>src</GroupName>
+          <Files>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>drivers</GroupName>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
+          <GroupName>::Device</GroupName>
         </Group>
       </Groups>
     </Target>
   </Targets>
+
+  <RTE>
+    <apis/>
+    <components>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.3.0" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.6.0"/>
+        <targetInfos>
+          <targetInfo name="demo"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.0.0" condition="S32K_ARMCC_AC6">
+        <package name="S32_SDK_DFP" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.2.0"/>
+        <targetInfos>
+          <targetInfo name="demo">
+            <c>
+              <MiscControls>-Wno-dollar-in-identifier-extension -Wno-macro-redefined</MiscControls>
+            </c>
+          </targetInfo>
+        </targetInfos>
+      </component>
+    </components>
+    <files>
+      <file attr="config" category="linkerScript" condition="S32K146_128" name="platform\devices\S32K146\linker\arm\S32K146_128_flash_AC6.sct" version="1.0.0">
+        <instance index="0">RTE\Device\S32K146UAxxxLQx\S32K146_128_flash_AC6.sct</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.0.0" condition="S32K_ARMCC_AC6"/>
+        <package name="S32_SDK_DFP" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.2.0"/>
+        <targetInfos>
+          <targetInfo name="demo"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="linkerScript" condition="S32K146_128" name="platform\devices\S32K146\linker\arm\S32K146_128_ram_AC6.sct" version="1.0.0">
+        <instance index="0">RTE\Device\S32K146UAxxxLQx\S32K146_128_ram_AC6.sct</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.0.0" condition="S32K_ARMCC_AC6"/>
+        <package name="S32_SDK_DFP" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.2.0"/>
+        <targetInfos>
+          <targetInfo name="demo"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="source" condition="S32K146" name="platform\devices\S32K146\startup\arm\startup_S32K146.s" version="1.0.0">
+        <instance index="0">RTE\Device\S32K146UAxxxLQx\startup_S32K146.s</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.0.0" condition="S32K_ARMCC_AC6"/>
+        <package name="S32_SDK_DFP" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.2.0"/>
+        <targetInfos>
+          <targetInfo name="demo"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="source" condition="S32K146" name="platform\devices\S32K146\startup\system_S32K146.c" version="1.0.0">
+        <instance index="0">RTE\Device\S32K146UAxxxLQx\system_S32K146.c</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.0.0" condition="S32K_ARMCC_AC6"/>
+        <package name="S32_SDK_DFP" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.2.0"/>
+        <targetInfos>
+          <targetInfo name="demo"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="header" condition="S32K146" name="platform\devices\S32K146\startup\system_S32K146.h" version="1.0.0">
+        <instance index="0">RTE\Device\S32K146UAxxxLQx\system_S32K146.h</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.0.0" condition="S32K_ARMCC_AC6"/>
+        <package name="S32_SDK_DFP" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.2.0"/>
+        <targetInfos>
+          <targetInfo name="demo"/>
+        </targetInfos>
+      </file>
+    </files>
+  </RTE>
 
 </Project>

@@ -1,0 +1,3 @@
+[submodule "rtos"]
+	path = rtos
+	url = https://github.com/cpchrispye/arm_scheduler.git
