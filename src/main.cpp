@@ -6,6 +6,10 @@
 #include "device_registers.h"
 #include "system_S32K146.h"
 
+#include "driver_pins.h"
+
+using namespace driver;
+
 __asm(".global __use_no_semihosting\n\t");
 
 extern "C"
@@ -33,10 +37,12 @@ bool high_event(void)
 void task_a(void)
 {
 
+
 	volatile float c = 1.2;
 	while(1)
 	{
         sch_sleep(5 * 1000 * 1000);
+        pin::set(pin::PORT::D, 0, true);
         abc = 100;
 	}
 
@@ -48,6 +54,7 @@ void task_b(void)
 	while(1)
 	{
         sch_event(high_event);
+        pin::set(pin::PORT::D, 0, false);
         abc = 33;
         
 	}
@@ -63,10 +70,11 @@ int main(void)
     //SystemInit();
     
     NVIC_SetPriority(PendSV_IRQn, 0xFF);
-	SysTick_Config(SystemCoreClock / 1000); // tick 10000 ticks per second
+	SysTick_Config(SystemCoreClock / 100); // tick 10000 ticks per second
 
+    pin::init(pin::PORT::D, 0, pin::MUX::GPIO, false);
 
-    sch_run_tasks( 1000 );
+    sch_run_tasks( 10000 );
 	while(1)
 	{
         ;

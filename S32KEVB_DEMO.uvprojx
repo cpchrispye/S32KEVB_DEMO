@@ -338,7 +338,7 @@
               <MiscControls>-Wno-padded -Wno-covered-switch-default  -Wno-unreachable-code-break</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\rtos\inc</IncludePath>
+              <IncludePath>.\rtos\inc;.\src\drivers\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -395,7 +395,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>src</GroupName>
+          <GroupName>app</GroupName>
           <Files>
             <File>
               <FileName>main.cpp</FileName>
@@ -406,6 +406,13 @@
         </Group>
         <Group>
           <GroupName>drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>driver_pins.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\drivers\src\driver_pins.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>
