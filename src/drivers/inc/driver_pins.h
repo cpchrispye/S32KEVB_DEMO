@@ -70,7 +70,7 @@ DATA STRUCTURES AND TYPE DEFINITIONS
 ========================================================================
 */
 
-        void init( PORT port, uint32_t pin, MUX mux, bool input, PULL pull = PULL::NONE );
+        void init( PORT port, uint32_t pin, MUX mux, bool output = false, PULL pull = PULL::NONE );
         void set( PORT port, uint32_t pin, bool input);
         void set( PORT port, uint32_t bits);
         bool get( PORT port, uint32_t pin);

@@ -73,7 +73,7 @@ namespace pin {
 */
 //========================================================================
 
-void init( PORT port, uint32_t pin, MUX mux, bool input, PULL pull )
+void init( PORT port, uint32_t pin, MUX mux, bool output, PULL pull )
 {
     auto port_i = static_cast<uint32_t>(port);
     auto mux_i  = static_cast<uint32_t>(mux);
@@ -89,11 +89,11 @@ void init( PORT port, uint32_t pin, MUX mux, bool input, PULL pull )
     auto &gpio_obj = GPIO_REGS[port_i];
 
     uint32_t tmp = gpio_obj->PDDR & ~(1U << pin);
-    gpio_obj->PDDR = tmp | static_cast<uint32_t >(input << pin);
+    gpio_obj->PDDR = tmp | static_cast<uint32_t >(output << pin);
 
     port_obj->PCR[pin] = PORT_PCR_MUX( mux_i )
                          | PORT_PCR_PE( pull != PULL::NONE )
-                         | PORT_PCR_PS( pull == PULL::DOWN )
+                         | PORT_PCR_PS( pull == PULL::UP )
                          | PORT_PCR_PFE( 0 );
 }
 

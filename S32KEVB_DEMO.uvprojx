@@ -412,6 +412,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\drivers\src\driver_pins.cpp</FilePath>
             </File>
+            <File>
+              <FileName>safe_var.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\drivers\src\safe_var.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

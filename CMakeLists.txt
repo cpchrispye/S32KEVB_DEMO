@@ -19,4 +19,6 @@ add_executable(S32KEVB_DEMO
         rtos/src/scheduler.c
         src/main.cpp
         src/drivers/src/driver_pins.cpp
-        src/drivers/inc/driver_pins.h)
+        src/drivers/inc/driver_pins.h
+        src/drivers/src/safe_var.cpp
+        src/drivers/inc/safe_var.h)

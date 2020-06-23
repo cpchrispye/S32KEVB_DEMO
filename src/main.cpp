@@ -1,5 +1,5 @@
 #include "scheduler.h"
-
+#include "safe_var.h"
 
 
 
@@ -20,6 +20,7 @@ void _ttywrch(int ch) { }
 }
 
 static volatile float st = 0.0;
+safe_var<float> sv(1.2);
 
 uint32_t stack_a[0x100];
 uint32_t stack_b[0x100];
@@ -27,11 +28,17 @@ static int abc = 0;
 
 bool low_event(void)
 {
-    return abc < 50;
+    ASSERT(sv.test());
+    return sv < 50;
 }
 bool high_event(void)
 {
-    return abc >= 50;
+    if(!sv.test())
+    {
+        while(1)
+            ;
+    }
+    return sv >= 50.0;
 }
 
 void task_a(void)
@@ -43,7 +50,7 @@ void task_a(void)
 	{
         sch_sleep(5 * 1000 * 1000);
         pin::set(pin::PORT::D, 0, true);
-        abc = 100;
+        sv = 100;
 	}
 
 }
@@ -55,13 +62,16 @@ void task_b(void)
 	{
         sch_event(high_event);
         pin::set(pin::PORT::D, 0, false);
-        abc = 33;
+        sv = 33;
         
 	}
 }
 
 int main(void)
 {
+    safe_var<int> si(10);
+    safe_var<float> sv(1.2);
+    
     sch_add_task( task_a, false, (uint8_t *)stack_a, sizeof( stack_a ) );
     sch_add_task( task_b, true, (uint8_t *)stack_b, sizeof( stack_b ) );
 	
@@ -72,8 +82,10 @@ int main(void)
     NVIC_SetPriority(PendSV_IRQn, 0xFF);
 	SysTick_Config(SystemCoreClock / 100); // tick 10000 ticks per second
 
-    pin::init(pin::PORT::D, 0, pin::MUX::GPIO, false);
-
+    pin::init(pin::PORT::D, 0, pin::MUX::GPIO, true, pin::PULL::NONE);
+    
+    si += 10;
+    sv += 10;
     sch_run_tasks( 10000 );
 	while(1)
 	{
